@@ -61,8 +61,6 @@ Things you may want to cover:
 
     The .env file at the root will be used for docker-composer.yml
 
-    Similarly
-
 * API Documentation
 
     Access the Api documentation for this ruby on rails -api mode application on this link: https://documenter.getpostman.com/view/30127780/2sA3kUFhDX
