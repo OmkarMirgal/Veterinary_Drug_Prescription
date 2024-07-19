@@ -10,10 +10,21 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/api';
   private tokenKey = 'authToken';
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
   constructor(private http: HttpClient) {}
+
+  private getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  private get httpOptions() {
+    const token = this.getToken();
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token ? `${token}` : ''
+      })
+    };
+  }
 
   signup(data: ISignupData): Observable<boolean> {
     return this.http
@@ -39,14 +50,31 @@ export class AuthService {
       );
   }
 
+  logout(): Observable<{ success: boolean, message: string }> {
+    return this.http
+      .post<{ message?: string }>(`${this.apiUrl}/logout`, {}, this.httpOptions)
+      .pipe(
+        tap((response) => {
+          if (response.message === 'Logged out successfully') {
+            this.unsetToken(this.tokenKey);
+          }
+        }),
+        map(() => ({ success: true, message: 'Logged out successfully' })),
+        catchError((error) => {
+          const errorMsg = error.error ? error.error : 'Logout failed';
+          return of({ success: false, message: errorMsg });
+        })
+      );
+  } 
+
   private setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
-
-  // private getToken(): string | null {
-  //   return localStorage.getItem(this.tokenKey);
-  // }
-
+  
+  private unsetToken(token: string): void {
+    localStorage.removeItem(this.tokenKey);
+  }
+  
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
