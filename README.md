@@ -42,26 +42,26 @@ Things you may want to cover:
 
     For Deployment the Docker is used, Dockerfile for this app is at the root of this directory. 
     
-    Just run docker build . (. here is execute from currect directory)
+        Just run docker build . (. here is execute from currect directory)
+    
+        For ruby and for angular DockerFile is uesd to build the images.
+    
+        To deploy the angular on production use the commented production code in Dockerfile and yml file at root,      and update the docker-composer.yml for production. 
+    
+        At the root there exist an .env and docker-compose.yml which spins up whole stack on docker containers
+    
+        Just run docker-compose up --build
+        or 
+        docker-compose build && docker-compose up
 
-    For ruby and for angular DockerFile is uesd to build the images.
-
-    to deploy the angular on production use the commented production code in Dockerfile and yml file at root,  and update the docker-composer.yml for production. 
-
-    At the root there exist an .env and docker-compose.yml which spins up whole stack on docker containers
-
-    Just run docker-compose up --build
-    or 
-    docker-compose build && docker-compose up
-
-    To check containers status use docker ps
+        To check containers status use docker ps
 
     if containers have not started use docker start {container_id}
     eg. docker start abc123def456
 
     The .env file at the root will be used for docker-composer.yml
 
-    Similaary
+    Similarly
 
 * API Documentation
 
