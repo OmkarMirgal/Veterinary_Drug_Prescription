@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Stables</h2>
+    <button class="btn btn-primary" routerLink="/stables/add" routerLinkActive="active" ariaCurrentWhenActive="page">Add New Stable</button>
+  </div>
+  
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-light">
+          <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Stable Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Add Prescription</th>
+            <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+        @for (stable of stables; track stable.id) {
+        <tr>
+          <th scope="row">{{$index+1}}</th>
+          <td>{{stable.name}}</td>
+          <td>{{stable.location}}</td>
+          <td>{{stable.owner}}</td>
+          <td>
+            <button class="btn btn-success" (click)="addPrescription(stable.id)">Add Prescription</button>
+          </td>
+          <td>
+            <button class="btn btn-secondary" (click)="editStable(stable)">Edit</button>
+            <button class="btn btn-danger ms-1" (click)="deleteStable(stable.id)">Delete</button>
+          </td>
+        </tr>
+      } @empty {
+        <th colspan="5" class="text-center">There are no stables.</th>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (stableSuccess) {
+    <div class="alert alert-success mt-3">
+      {{ stableSuccess }}
+    </div>
+  }
+
+  @if (stableError) {
+  <div class="alert alert-danger mt-3">
+    {{ stableError }}
+  </div>
+  }
+</div>  
+

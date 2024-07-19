@@ -1,0 +1,177 @@
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>{{ isEditMode ? 'Edit Prescription' : 'Add New Prescription' }}</h2>
+      <div class="d-flex">
+        <button class="btn btn-primary" routerLink="/stables">Back to Stables</button>
+        <button class="btn btn-primary ms-2" routerLink="/prescriptions">Back to Prescriptions</button>
+      </div>
+    </div>
+   
+    <form [formGroup]="prescriptionForm" (ngSubmit)="onSubmit()"> 
+      
+      <div class="mt-2">
+        <label class="form-label" for="stable_id">Stable ID:</label>
+        <input class="form-control" type="text" id="stable_id" formControlName="stable_id" readonly required />
+        @if (prescriptionForm.get('stable_id')?.invalid && prescriptionForm.get('stable_id')?.touched) {
+          <div>
+            @if (prescriptionForm.get('stable_id')?.errors?.['required']) {
+              <span class="text-danger">Stable ID is required.</span>
+            }
+            @if (prescriptionForm.get('stable_id')?.errors?.['pattern']) {
+              <span class="text-danger">Stable ID must be a number.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="mt-2">
+        <label class="form-label" for="indication">Indication:</label>
+        <input class="form-control" type="text" id="indication" formControlName="indication" required />
+        @if (prescriptionForm.get('indication')?.invalid && prescriptionForm.get('indication')?.touched) {
+          <div>
+            @if (prescriptionForm.get('indication')?.errors?.['required']) {
+              <span class="text-danger">Indication is required.</span>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="mt-2">
+        <label class="form-label" for="diagnosisDetails">Diagnosis details:</label>
+        <input class="form-control" type="text" id="diagnosisDetails" formControlName="diagnosisDetails" required />
+        @if (prescriptionForm.get('diagnosisDetails')?.invalid && prescriptionForm.get('diagnosisDetails')?.touched) {
+          <div>
+            @if (prescriptionForm.get('diagnosisDetails')?.errors?.['required']) {
+              <span class="text-danger">Diagnosis details are required.</span>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="mt-2">
+        <label class="form-label" for="application">Application through:</label>
+        <input class="form-control" type="text" id="application" formControlName="application" required />
+        @if (prescriptionForm.get('application')?.invalid && prescriptionForm.get('application')?.touched) {
+          <div>
+            @if (prescriptionForm.get('application')?.errors?.['required']) {
+              <span class="text-danger">Application is required.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="mt-2">
+        <label class="form-label" for="amount">Amount:</label>
+        <input class="form-control" type="text" id="amountUnit" formControlName="amount" required />
+        @if (prescriptionForm.get('amount')?.invalid && prescriptionForm.get('amount')?.touched) {
+          <div>
+            @if (prescriptionForm.get('amount')?.errors?.['required']) {
+              <span class="text-danger">Amount is required.</span>
+            }
+            @if (prescriptionForm.get('amount')?.errors?.['pattern']) {
+              <span class="text-danger">Amount must be a number.</span>
+            }
+          </div>
+        }
+      </div>
+      
+      <div class="mt-2">
+        <label class="form-label" for="unit">Amount unit:</label>
+        <input class="form-control" type="text" id="unit" formControlName="amountUnit" required />
+        @if (prescriptionForm.get('amountUnit')?.invalid && prescriptionForm.get('amountUnit')?.touched) {
+          <div>
+            @if (prescriptionForm.get('amountUnit')?.errors?.['required']) {
+              <span class="text-danger">Amount unit is required.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="mt-2">
+        <label class="form-label" for="dosage">Dosage:</label>
+        <input class="form-control" type="text" id="dosage" formControlName="dosage" required />
+        @if (prescriptionForm.get('dosage')?.invalid && prescriptionForm.get('dosage')?.touched) {
+          <div>
+            @if (prescriptionForm.get('dosage')?.errors?.['required']) {
+              <span class="text-danger">Dosage is required.</span>
+            }
+            @if (prescriptionForm.get('dosage')?.errors?.['pattern']) {
+              <span class="text-danger">Dosage must be a number.</span>
+            }
+          </div>
+        }
+      </div>
+     
+      <div class="mt-2">
+        <label class="form-label" for="dosage">Application Date:</label>
+        <input class="form-control" type="date" id="applicationDate" formControlName="applicationDate" required />
+        @if (prescriptionForm.get('applicationDate')?.invalid && prescriptionForm.get('applicationDate')?.touched) {
+          <div>
+            @if (prescriptionForm.get('applicationDate')?.errors?.['required']) {
+              <span class="text-danger">Application Date is required.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="mt-2">
+        <label class="form-label" for="applicationDuration">Application Duration:</label>
+        <input class="form-control" type="text" id="applicationDuration" formControlName="applicationDuration" required />
+        @if (prescriptionForm.get('applicationDuration')?.invalid && prescriptionForm.get('applicationDuration')?.touched) {
+          <div>
+            @if (prescriptionForm.get('applicationDuration')?.errors?.['required']) {
+              <span class="text-danger">Application Duration is required.</span>
+            }
+            @if (prescriptionForm.get('applicationDuration')?.errors?.['pattern']) {
+              <span class="text-danger">Application Duration must be a number.</span>
+            }
+          </div>
+        }
+      </div>
+      
+      <div class="mt-2">
+        <label class="form-label" for="usageDuration">Usage Duration:</label>
+        <input class="form-control" type="text" id="usageDuration" formControlName="usageDuration" required />
+        @if (prescriptionForm.get('usageDuration')?.invalid && prescriptionForm.get('usageDuration')?.touched) {
+          <div>
+            @if (prescriptionForm.get('usageDuration')?.errors?.['required']) {
+              <span class="text-danger">Usage Duration is required.</span>
+            }
+            @if (prescriptionForm.get('usageDuration')?.errors?.['pattern']) {
+              <span class="text-danger">Usage Duration must be a number.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="mt-2">
+        <label class="form-label" for="usageInstructions">Usage Instructions:</label>
+        <input class="form-control" type="text" id="usageInstructions" formControlName="usageInstructions" required />
+        @if (prescriptionForm.get('usageInstructions')?.invalid && prescriptionForm.get('usageInstructions')?.touched) {
+          <div>
+            @if (prescriptionForm.get('usageInstructions')?.errors?.['required']) {
+              <span class="text-danger">Usage Instructions is required.</span>
+            }
+          </div>
+        }
+      </div>
+  
+      <button class="btn btn-primary mt-3" type="submit">{{ isEditMode ? 'Save' : 'Add' }}</button>
+  
+      
+      @if (prescriptionSuccess) {
+        <div class="alert alert-success mt-3">
+          {{ prescriptionSuccess }}
+        </div>
+      }
+  
+      @if (prescriptionError) {
+      <div class="alert alert-danger mt-3">
+        {{ prescriptionError }}
+      </div>
+      }
+    </form>
+    </div>  
+    
+    

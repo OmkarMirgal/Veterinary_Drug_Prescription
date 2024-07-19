@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Prescriptions</h2>
+      <button class="btn btn-primary" routerLink="/stables" ariaCurrentWhenActive="page">Go To Stables</button>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light align-middle">
+            <tr>
+              <th scope="col">Sr.No</th>
+              <th scope="col">StableId</th>
+              <th scope="col">Indication</th>
+              <th scope="col">Details</th>
+              <th scope="col">Application</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Unit</th>
+              <th scope="col">Dosage</th>
+              <th scope="col">applicationDate</th>
+              <th scope="col">applicationDuration</th>
+              <th scope="col">usage</th>
+              <th scope="col">usageInstructions</th>
+              <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+          @for (prescription of prescriptions; track prescription.id) {
+          <tr>
+            <th scope="row">{{$index+1}}</th>
+            <td>{{prescription.stable_id}}</td>
+            <td>{{prescription.indication}}</td>
+            <td>{{prescription.diagnosisDetails}}</td>
+            <td>{{prescription.application}}</td>
+            <td>{{prescription.amount}}</td>
+            <td>{{prescription.amountUnit}}</td>
+            <td>{{prescription.dosage}} times</td>
+            <td>{{prescription.applicationDate}}</td>
+            <td>{{prescription.applicationDuration}} days</td>
+            <td>{{prescription.usageDuration}} days</td>
+            <td>{{prescription.usageInstructions}}</td>
+            <td>
+              <button class="btn btn-secondary" (click)="editPrescription(prescription)">Edit</button>
+              <button class="btn btn-danger ms-1" (click)="deletePrescription(prescription.id)">Delete</button>
+            </td>
+          </tr>
+        } @empty {
+          <th colspan="13" class="text-center">There are no prescriptions.</th>
+          }
+        </tbody>
+      </table>
+    </div>
+  
+    @if (prescriptionSuccess) {
+      <div class="alert alert-success mt-3">
+        {{ prescriptionSuccess }}
+      </div>
+    }
+  
+    @if (prescriptionError) {
+    <div class="alert alert-danger mt-3">
+      {{ prescriptionError }}
+    </div>
+    }
+  </div>  
+  
+  

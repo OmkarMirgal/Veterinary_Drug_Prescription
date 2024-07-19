@@ -1,0 +1,62 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>{{ isEditMode ? 'Edit Stable' : 'Add New Stable' }}</h2>
+    <button class="btn btn-primary" routerLink="/stables">Back</button>
+  </div>
+ 
+  <form [formGroup]="stableForm" (ngSubmit)="onSubmit()"> 
+    <div class="mt-2">
+      <label class="form-label" for="name">Stable name:</label>
+      <input class="form-control" type="text" id="name" formControlName="name" required />
+      @if (stableForm.get('name')?.invalid && stableForm.get('name')?.touched) {
+        <div>
+          @if (stableForm.get('name')?.errors?.['required']) {
+            <span class="text-danger">Stable Name is required.</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label" for="name">Stable location:</label>
+      <input class="form-control" type="text" id="location" formControlName="location" required />
+      @if (stableForm.get('location')?.invalid && stableForm.get('location')?.touched) {
+        <div>
+          @if (stableForm.get('location')?.errors?.['required']) {
+            <span class="text-danger">Stable location is required.</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="mt-2">
+      <label class="form-label" for="name">Stable owner:</label>
+      <input class="form-control" type="text" id="owner" formControlName="owner" required />
+      @if (stableForm.get('owner')?.invalid && stableForm.get('owner')?.touched) {
+        <div>
+          @if (stableForm.get('owner')?.errors?.['required']) {
+            <span class="text-danger">Stable owner is required.</span>
+          }
+        </div>
+      }
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">{{ isEditMode ? 'Save' : 'Add' }}</button>
+
+    
+    @if (stableSuccess) {
+      <div class="alert alert-success mt-3">
+        {{ stableSuccess }}
+      </div>
+    }
+
+    @if (stableError) {
+    <div class="alert alert-danger mt-3">
+      {{ stableError }}
+    </div>
+    }
+  </form>
+  </div>  
+  
+  

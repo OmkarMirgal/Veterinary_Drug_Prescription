@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+# If running the rails server then create or migrate existing database
+if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
+  if ! database_exists; then
+      ./bin/rails db:create
+  fi
+  ./bin/rails db:prepare
+  ./bin/rails db:migrate
+fi
+
+exec "${@}"
