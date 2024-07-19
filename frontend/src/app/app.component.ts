@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectTokenPresent } from './state/auth.selectors';
 import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AuthService } from './services/auth/auth-service.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,8 @@ export class AppComponent {
   private tokenKey = 'authToken';
   private store = inject(Store)
   private router = inject(Router);
+  private authService = inject(AuthService);
+
   tokenPresent$: Observable<boolean>
 
   constructor() {
@@ -31,11 +34,17 @@ export class AppComponent {
   }
 
   logout() {
-    // Your logout logic here
-    localStorage.removeItem(this.tokenKey);
-    this.store.dispatch(clearTokenPresent());
-    this.router.navigate(['/']);
+    this.authService.logout().subscribe({
+      next:(response)=>{
+        if(response.success === true ){
+          this.store.dispatch(clearTokenPresent());
+          this.router.navigate(['/']);
+        }
+      },
+      error:(err)=>{
+        console.error(`Error logging out ${err}`)
+      }
+    })
   }
-
-
+  
 }
